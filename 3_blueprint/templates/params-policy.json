@@ -1,0 +1,6 @@
+{
+  "listOfAllowedSKUs": {
+    "reference": null,
+    "value": "[parameters('allowedvirtualmachinesizeSKUs_listOfAllowedSKUs')]"
+  }
+}

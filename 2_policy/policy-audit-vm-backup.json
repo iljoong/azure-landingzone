@@ -1,0 +1,15 @@
+{
+    "mode": "All",
+    "policyRule": {
+        "if": {
+            "field": "type",
+            "equals": "Microsoft.Compute/virtualMachines"
+        },
+        "then": {
+            "effect": "auditIfNotExists",
+            "details": {
+                "type": "Microsoft.RecoveryServices/backupprotecteditems"
+            }
+        }
+    }
+}

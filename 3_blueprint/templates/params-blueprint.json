@@ -1,0 +1,35 @@
+{
+    "Organization_Name": {
+      "type": "string",
+      "metadata": {
+        "displayName": "Enter your organization name (e.g. Contoso), must be unique",
+        "description": "Organization_Name"
+      },
+      "allowedValues": []
+    },
+    "IPAddress_Space": {
+      "type": "string",
+      "metadata": {
+        "displayName": "Virtual Network IP Addressspace - Provide first 2 octets i.e. 10.0",
+        "description": "IPAddress_Space"
+      },
+      "allowedValues": []
+    },
+    "allowedvirtualmachinesizeSKUs_listOfAllowedSKUs": {
+      "type": "array",
+      "metadata": {
+        "displayName": "Allowed Size SKUs (Policy: Allowed virtual machine size SKUs)",
+        "strongType": "VMSKUs"
+      },
+      "allowedValues": []
+    },
+    "AzureRegion": {
+      "type": "string",
+      "metadata": {
+        "displayName": "Select the Azure Region to deploy the Resources",
+        "description": "AzureRegion",
+        "strongType": "location"
+      },
+      "defaultValue": "koreacentral"
+    }
+  }

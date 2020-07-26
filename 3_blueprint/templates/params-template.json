@@ -1,0 +1,10 @@
+{
+    "IPAddress_Space": {
+      "reference": null,
+      "value": "[parameters('IPAddress_Space')]"
+    },
+    "Organization_Name": {
+      "reference": null,
+      "value": "[parameters('Organization_Name')]"
+    }
+  }
