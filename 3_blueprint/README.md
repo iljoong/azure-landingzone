@@ -33,7 +33,7 @@ az deployment group what-if --parameters '{ ""Organization_Name"": { ""value"": 
 
 CLI to create blueprint
 
-> Azure CLI does not work well, such as _adding json snippet_, in Windows/PowerShell environment and use Cloud Shell or WSL.
+> Azure CLI does not work well, such as _adding json snippet_, in Windows/PowerShell environment. Use Cloud Shell or WSL.
 
 ```sh
 az blueprint create --name 'demo-blueprint' \
@@ -62,7 +62,7 @@ az blueprint artifact template create --blueprint-name 'demo-blueprint' \
     --subscription $subscriptionid
 
 az blueprint publish --blueprint-name 'demo-blueprint' \
-    --version v2 \
+    --version '0.1' \
     --subscription $subscriptionid
 ```
 
