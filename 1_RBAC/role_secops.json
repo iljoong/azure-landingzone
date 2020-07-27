@@ -1,0 +1,15 @@
+{
+    "Name": "SecOps",
+    "Description": "Platform-wide global connectivity management: VNets, UDRs, NSGs, NVAs, VPN, ExpressRoute, and others.",
+    "Actions": [
+        "*/read",
+        "Microsoft.Authorization/*/write",
+        "Microsoft.Network/vpnGateways/*",
+        "Microsoft.Network/expressRouteCircuits/*",
+        "Microsoft.Network/routeTables/write",
+        "Microsoft.Network/vpnSites/*"
+    ],
+    "NoActions": [
+    ],
+    "AssignableScopes": ["/subscriptions/{subscription_id}"]
+}

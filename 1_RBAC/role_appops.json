@@ -1,0 +1,13 @@
+{
+    "Name": "AppOps",
+    "Description": "Contributor role granted for application/operations team at resource group level.",
+    "Actions": [
+        "*"
+    ],
+    "NoActions": [
+        "Microsoft.Network/publicIPAddresses/write",
+        "Microsoft.Network/virtualNetworks/write",
+        "Microsoft.KeyVault/locations/deletedVaults/purge/action"
+    ],
+    "AssignableScopes": ["/subscriptions/{subscription_id}"]
+}

@@ -1,0 +1,18 @@
+{
+    "Name": "SecOps",
+    "Description": "Security administrator role with a horizontal view across the entire Azure estate and the Azure Key Vault purge policy.",
+    "Actions": [
+        "*/read",
+        "*/register/action",
+        "Microsoft.KeyVault/locations/deletedVaults/purge/action",
+        "Microsoft.Insights/alertRules/*",
+        "Microsoft.Authorization/policyDefinitions/*",
+        "Microsoft.Authorization/policyAssignments/*",
+        "Microsoft.Authorization/policySetDefinitions/*",
+        "Microsoft.PolicyInsights/*",
+        "Microsoft.Security/*"
+    ],
+    "NoActions": [
+    ],
+    "AssignableScopes": ["/subscriptions/{subscription_id}"]
+}
