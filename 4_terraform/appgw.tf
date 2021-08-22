@@ -7,6 +7,7 @@ resource "azurerm_public_ip" "appgw" {
   location            = var.location
   allocation_method   = "Static"
   sku                 = "Standard"
+  availability_zone   = "No-Zone"
 
   tags = {
     environment = var.env

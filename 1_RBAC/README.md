@@ -33,7 +33,7 @@ az role assignment create --assignee {object id of user or group} --role 'AppOps
 
 https://docs.microsoft.com/en-us/cli/azure/role/definition?view=azure-cli-latest
 
-> You cannot assign `CustomRole` in Blueprint.
+> :warining: You cannot assign `CustomRole` in Blueprint.
 
 ## Reference
 

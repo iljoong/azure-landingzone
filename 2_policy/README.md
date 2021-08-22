@@ -32,6 +32,21 @@ You need manually copy values to the parameters when assigning the policy.
 
 this policy _deploy-if-not-exist_ WAF log (`ApplicationGatewayAccessLog`, `ApplicationGatewayFirewallLog`) to Log Analytics account
 
+### Storage log
+
+Storage monitoring is not currently supported and in preview. You can manually show/enable diagnostics log using CLI.
+
+> Log is stored in own storage account in `$log` container.
+
+```
+az storage logging show --account-name storageaccount -o table
+az storage logging update --account-name storageaccount --services b --log rwd --retention 90
+```
+
+https://docs.microsoft.com/en-us/azure/storage/common/storage-analytics-logging?tabs=dotnet
+
+> Azure Storage Policy preview: https://github.com/ciphertxt/AzureStoragePolicy
+
 ## CLI
 
 CLI to create policy definition

@@ -1,0 +1,36 @@
+{
+    "mode": "All",
+    "parameters": {
+        "addressPrefix": {
+            "type": "Array",
+            "metadata": {
+                "displayName": "Address Prefix",
+                "description": "Address Prefix"
+            },
+            "defaultValue": [
+                "100.64.0.0/16"
+            ]
+        }
+    },
+    "policyRule": {
+        "if": {
+            "anyOf": [
+                {
+                    "allOf": [
+                        {
+                            "field": "type",
+                            "equals": "Microsoft.Network/virtualNetworks"
+                        },
+                        {
+                            "field": "Microsoft.Network/virtualNetworks/addressSpace.addressPrefixes[*]",
+                            "in": "[parameters('addressPrefix')]"
+                        }
+                    ]
+                }
+            ]
+        },
+        "then": {
+            "effect": "deny"
+        }
+    }
+}
