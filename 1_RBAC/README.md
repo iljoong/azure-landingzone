@@ -29,8 +29,6 @@ az role definition create --role-definition role_appops.json
 az role assignment create --assignee {object id of user or group} --role 'AppOps' --scope '/subscriptions/{subscription id}'
 ```
 
-
-
 https://docs.microsoft.com/en-us/cli/azure/role/definition?view=azure-cli-latest
 
 > :warining: You cannot assign `CustomRole` in Blueprint.

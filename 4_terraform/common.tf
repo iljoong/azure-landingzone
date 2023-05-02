@@ -9,11 +9,11 @@ provider "azurerm" {
 }
 
 data "azurerm_resource_group" "tfrg" {
-  name = "${var.prefix}-app-rg"
+  name = "${var.prefix}-${var.appname}-rg"
 }
 
 data "azurerm_virtual_network" "tfvnet" {
-  name                = "${var.prefix}-vNET"
+  name                = "${var.prefix}-${var.appname}-vnet"
   resource_group_name = data.azurerm_resource_group.tfrg.name
 }
 
@@ -30,7 +30,7 @@ data "azurerm_subnet" "appsnet" {
 }
 
 data "azurerm_network_security_group" "appnsg" {
-  name                = "${var.prefix}-Core-NSG"
+  name                = "${var.prefix}-core-nsg"
   resource_group_name = data.azurerm_resource_group.tfrg.name
 }
 

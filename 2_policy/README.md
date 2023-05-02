@@ -18,42 +18,21 @@ For more built-in polices, see [https://docs.microsoft.com/en-us/azure/governanc
 
 ### NSG flow log
 
-this policy _deploy-if-not-exist_ NSG flow log to both Storage account and Log Analytics account
-
-You need manually copy values to the parameters when assigning the policy.
-
-| parameter       | value |
-|-----------------|-------|
-| storage id      | /subscriptions/{subscription_id}/resourceGroups/{resourcegroup_name}/providers/Microsoft.Storage/storageAccounts/{storage_name} |
-| loganalytics id | 9fe24170-1111-2222-3333-a80ab16e9753 |
-| logana res id   | /subscriptions/{subscription_id}/resourceGroups/{resourcegroup_name}/providers/microsoft.operationalinsights/workspaces/{workspace_name} |
+For NSG flow log, see https://learn.microsoft.com/en-us/azure/network-watcher/nsg-flow-logs-policy-portal
 
 ### WAF log
 
-this policy _deploy-if-not-exist_ WAF log (`ApplicationGatewayAccessLog`, `ApplicationGatewayFirewallLog`) to Log Analytics account
+> Updated for new `Diagnostics` ARM template. See the [document](https://learn.microsoft.com/en-us/azure/templates/microsoft.insights/diagnosticsettings?pivots=deployment-language-arm-template) for more information.
 
-### Storage log
-
-Storage monitoring is not currently supported and in preview. You can manually show/enable diagnostics log using CLI.
-
-> Log is stored in own storage account in `$log` container.
-
-```
-az storage logging show --account-name storageaccount -o table
-az storage logging update --account-name storageaccount --services b --log rwd --retention 90
-```
-
-https://docs.microsoft.com/en-us/azure/storage/common/storage-analytics-logging?tabs=dotnet
-
-> Azure Storage Policy preview: https://github.com/ciphertxt/AzureStoragePolicy
+this policy _deploy-if-not-exist_ WAF log (`ApplicationGatewayAccessLog`, `ApplicationGatewayPerformanceLog`, `ApplicationGatewayFirewallLog`) to Log Analytics account
 
 ## CLI
 
 CLI to create policy definition
 
 ```powershell
-Get-Content .\policy-deploy-waf-log.json | ConvertFrom-Json | % { $_.parameters } | ConvertTo-Json -Depth 10 > _params.json
-Get-Content .\policy-deploy-waf-log.json | ConvertFrom-Json | % { $_.policyRule } | ConvertTo-Json -Depth 10 > _rules.json
+Get-Content .\policy-deploy-waf-log.json | ConvertFrom-Json | % { $_.parameters } | ConvertTo-Json -Depth 15 > _params.json
+Get-Content .\policy-deploy-waf-log.json | ConvertFrom-Json | % { $_.policyRule } | ConvertTo-Json -Depth 15 > _rules.json
 
 az policy definition create --name 'test-deploy-waf-log' `
     --mode all --rules _rules.json `

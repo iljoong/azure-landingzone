@@ -1,5 +1,5 @@
 # Azure VM
-# https://www.terraform.io/docs/providers/azurerm/r/virtual_machine.html
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine.html
 
 locals {
   app = {
@@ -18,7 +18,7 @@ resource "azurerm_network_interface" "appnic" {
     name      = "${local.app.prefix}-nicconfig${count.index}"
     subnet_id = data.azurerm_subnet.appsnet.id
 
-    private_ip_address_allocation = "dynamic"
+    private_ip_address_allocation = "Dynamic"
   }
 }
 
@@ -51,7 +51,7 @@ resource "azurerm_network_interface_application_gateway_backend_address_pool_ass
   count                   = var.appcount
   network_interface_id    = element(azurerm_network_interface.appnic.*.id, count.index)
   ip_configuration_name   = "${local.app.prefix}-nicconfig${count.index}"
-  backend_address_pool_id = azurerm_application_gateway.tfappgw.backend_address_pool[0].id
+  backend_address_pool_id = tolist(azurerm_application_gateway.tfappgw.backend_address_pool).0.id
 }
 
 

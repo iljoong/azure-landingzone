@@ -1,5 +1,7 @@
 # README
 
+>❗RBAC, Policy and Terraform updated to latest version.
+
 This sample demonstrates how to setup Azure landing zone. This landing zone provides following governing concept. 
 
 - Centralized logging/monitoring to Storage account/Log Analytics
@@ -27,7 +29,6 @@ Set baseline policies in subscription/management group scope for the landing zon
 - Cost optimization, enforce only certain VM SKU can be deployed in this subscription
 - Security, enable ASC
 - Centralized log (logs are stored in central location of Log Analytics or Storage account):
-    - NSG Flow log: automatically enable NSG Flow log 
     - WAF log: automatically enable WAF log
     - OS(VM) log: syslog and metrics
 
