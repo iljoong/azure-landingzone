@@ -7,16 +7,8 @@
                 "description": "The profile name Azure Diagnostics"
             }
         },
-        "azureRegions": {
-            "type": "Array",
-            "metadata": {
-                "displayName": "Allowed Locations",
-                "description": "The list of locations that can be specified when deploying resources",
-                "strongType": "location"
-            }
-        },
         "logAnalytics": {
-            "type": "string",
+            "type": "String",
             "metadata": {
                 "displayName": "logAnalytics",
                 "description": "The target Log Analytics Workspace for Azure Diagnostics",
@@ -24,28 +16,28 @@
             }
         },
         "metricsEnabled": {
-            "type": "String",
+            "type": "Boolean",
             "metadata": {
                 "displayName": "Enable Metrics",
                 "description": "Enable Metrics - True or False"
             },
             "allowedValues": [
-                "True",
-                "False"
+                true,
+                false
             ],
-            "defaultValue": "False"
+            "defaultValue": false
         },
         "logsEnabled": {
-            "type": "String",
+            "type": "Boolean",
             "metadata": {
                 "displayName": "Enable Logs",
                 "description": "Enable Logs - True or False"
             },
             "allowedValues": [
-                "True",
-                "False"
+                true,
+                false
             ],
-            "defaultValue": "True"
+            "defaultValue": true
         }
     },
     "mode": "All",
@@ -55,10 +47,6 @@
                 {
                     "field": "type",
                     "equals": "Microsoft.Network/applicationGateways"
-                },
-                {
-                    "field": "location",
-                    "in": "[parameters('AzureRegions')]"
                 }
             ]
         },
@@ -89,23 +77,20 @@
                     "properties": {
                         "mode": "incremental",
                         "template": {
-                            "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+                            "$schema": "http://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
                             "contentVersion": "1.0.0.0",
                             "parameters": {
-                                "Name": {
-                                    "type": "string"
-                                },
-                                "location": {
+                                "name": {
                                     "type": "string"
                                 },
                                 "logAnalytics": {
                                     "type": "string"
                                 },
                                 "metricsEnabled": {
-                                    "type": "string"
+                                    "type": "bool"
                                 },
                                 "logsEnabled": {
-                                    "type": "string"
+                                    "type": "bool"
                                 },
                                 "profileName": {
                                     "type": "string"
@@ -114,32 +99,51 @@
                             "variables": {},
                             "resources": [
                                 {
-                                    "type": "Microsoft.Network/applicationGateways/providers/diagnosticSettings",
-                                    "apiVersion": "2017-05-01-preview",
-                                    "name": "[concat(parameters('Name'), '/', 'Microsoft.Insights/', parameters('ProfileName'))]",
-                                    "location": "[parameters('location')]",
-                                    "dependsOn": [],
+                                    "type": "Microsoft.Insights/diagnosticSettings",
+                                    "apiVersion": "2021-05-01-preview",
+                                    "scope": "[concat('Microsoft.Network/applicationGateways', '/', parameters('name'))]",
+                                    "location": null,
+                                    "name": "[parameters('profileName')]",
                                     "properties": {
                                         "workspaceId": "[parameters('logAnalytics')]",
+                                        "logs": [
+                                            {
+                                                "category": "ApplicationGatewayAccessLog",
+                                                "categoryGroup": null,
+                                                "enabled": "[parameters('logsEnabled')]",
+                                                "retentionPolicy": {
+                                                    "days": 0,
+                                                    "enabled": false
+                                                }
+                                            },
+                                            {
+                                                "category": "ApplicationGatewayPerformanceLog",
+                                                "categoryGroup": null,
+                                                "enabled": "[parameters('logsEnabled')]",
+                                                "retentionPolicy": {
+                                                    "days": 0,
+                                                    "enabled": false
+                                                }
+                                            },
+                                            {
+                                                "category": "ApplicationGatewayFirewallLog",
+                                                "categoryGroup": null,
+                                                "enabled": "[parameters('logsEnabled')]",
+                                                "retentionPolicy": {
+                                                    "days": 0,
+                                                    "enabled": false
+                                                }
+                                            }
+                                        ],
                                         "metrics": [
                                             {
                                                 "category": "AllMetrics",
                                                 "enabled": "[parameters('metricsEnabled')]",
                                                 "retentionPolicy": {
-                                                    "enabled": false,
-                                                    "days": 0
+                                                    "days": 0,
+                                                    "enabled": false
                                                 }
                                             }
-                                        ],
-                                        "logs": [
-                                            {
-                                                "category": "ApplicationGatewayAccessLog",
-                                                "enabled": "[parameters('logsEnabled')]"
-                                            },
-                                            {
-                                                "category": "ApplicationGatewayFirewallLog",
-                                                "enabled": "[parameters('logsEnabled')]"
-                                            }                                            
                                         ]
                                     }
                                 }
@@ -152,9 +156,6 @@
                             }
                         },
                         "parameters": {
-                            "location": {
-                                "value": "[field('location')]"
-                            },
                             "name": {
                                 "value": "[field('name')]"
                             },

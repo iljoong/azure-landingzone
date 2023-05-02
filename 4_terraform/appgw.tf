@@ -1,5 +1,5 @@
 # App Gateway
-# https://www.terraform.io/docs/providers/azurerm/r/application_gateway.html
+# https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/application_gateway.html
 
 resource "azurerm_public_ip" "appgw" {
   name                = "${var.prefix}-appgw-pip"
@@ -7,7 +7,6 @@ resource "azurerm_public_ip" "appgw" {
   location            = var.location
   allocation_method   = "Static"
   sku                 = "Standard"
-  availability_zone   = "No-Zone"
 
   tags = {
     environment = var.env
@@ -76,7 +75,7 @@ resource "azurerm_application_gateway" "tfappgw" {
 
   probe {
       name                = "health-probe"
-      protocol            = "http"
+      protocol            = "Http"
       host                = "127.0.0.1"
       path                = "/"
       interval            = 15
@@ -94,6 +93,8 @@ resource "azurerm_application_gateway" "tfappgw" {
     backend_http_settings_name = "http-settings"*/
 
     redirect_configuration_name = "httpredirect"
+
+    priority = 1
   }
 
   request_routing_rule {
@@ -103,6 +104,8 @@ resource "azurerm_application_gateway" "tfappgw" {
 
     backend_address_pool_name  = "wafpool"
     backend_http_settings_name = "http-settings"
+
+    priority = 2
   }
 
   redirect_configuration {

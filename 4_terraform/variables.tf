@@ -34,6 +34,10 @@ variable "prefix" {
   default = "demo"
 }
 
+variable "appname" {
+  default = "app"
+}
+
 variable "env" {
   default = "test"
 }

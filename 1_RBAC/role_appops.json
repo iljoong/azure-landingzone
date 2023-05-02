@@ -1,13 +1,22 @@
 {
-    "Name": "AppOps",
-    "Description": "Contributor role granted for application/operations team at resource group level.",
+    "assignableScopes": [
+        "/subscriptions/{subscription_id}"
+    ],
+    "roleName": "AppOps",
+    "description": "Contributor role granted for application/operations team at resource group level.",
     "Actions": [
         "*"
     ],
-    "NoActions": [
-        "Microsoft.Network/publicIPAddresses/write",
-        "Microsoft.Network/virtualNetworks/write",
-        "Microsoft.KeyVault/locations/deletedVaults/purge/action"
-    ],
-    "AssignableScopes": ["/subscriptions/{subscription_id}"]
+    "permissions": [
+        {
+            "actions": [
+                "*"
+            ],
+            "notActions": [
+                "Microsoft.Network/publicIPAddresses/write",
+                "Microsoft.Network/virtualNetworks/write",
+                "Microsoft.KeyVault/locations/deletedVaults/purge/action"
+            ]
+        }
+    ]
 }
