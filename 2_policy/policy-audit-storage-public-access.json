@@ -1,0 +1,43 @@
+{
+    "mode": "All",
+    "parameters": {
+        "tagName": {
+            "type": "String",
+            "metadata": {
+                "displayName": "Tag Name for public access",
+                "description": "Tag Name for public access, e.g. PUBLIC_ACCESS and value is either Y or N"
+            }
+        }
+    },
+    "policyRule": {
+        "if": {
+            "allOf": [
+              {
+                "field": "type",
+                "equals": "Microsoft.Storage/storageAccounts"
+              },
+              {
+                "field": "[concat('tags[', parameters('tagName'), ']')]",
+                "notEquals": "Y"
+              },
+              {
+                "anyOf": [
+                  {
+                    "field": "Microsoft.Storage/storageAccounts/publicNetworkAccess",
+                    "equals": "Enabled"
+                  },
+                  {
+                    "not": {
+                      "value": "[contains(string(field('Microsoft.Storage/storageAccounts/publicNetworkAccess')), '\"\"')]",
+                      "equals": true
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+        "then": {
+            "effect": "audit"
+        }
+    }
+}
