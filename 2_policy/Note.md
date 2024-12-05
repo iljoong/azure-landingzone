@@ -8,16 +8,15 @@ For sample policy definitions, please see [github samples](https://github.com/Az
 
 - Understand diagnostic template structure
 
-For NSG flow log, you'll need a ARM template deployment snippet (i.e., properties settings).
-https://docs.microsoft.com/en-us/azure/network-watcher/network-watcher-nsg-flow-logging-azure-resource-manager
+For NSG flow log, you'll need a ARM template deployment snippet (i.e., properties settings). https://learn.microsoft.com/en-us/azure/network-watcher/nsg-flow-logs-azure-resource-manager
 
 Alternatively, you can use REST API to get the properties settings from existing resource.
 
-For example, POSTMAN or similar tool to get properties of diagnostic settings of (nsg flow log)[https://docs.microsoft.com/en-us/rest/api/network-watcher/flowlogs/get]
+For example, `az rest` or similar tool to get properties of diagnostic settings of (nsg flow log)[https://learn.microsoft.com/en-us/rest/api/network-watcher/flow-logs/get]
 
 REST api
 ```
-GET https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/flowLogs/{flowLogName}?api-version=2020-05-01
+GET https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/flowLogs/{flowLogName}?api-version=2024-05-01
 ```
 
 result:
@@ -80,10 +79,10 @@ Other than NSG flow log, most of Azure resource diagnostics settings in ARM temp
 You can get properties value from following REST API.
 
 ```
-GET https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroupName}}/providers/{{resourceType}}/{{resourceName}}/providers/Microsoft.insights/diagnosticSettings?api-version=2017-05-01-preview
+GET https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceType}/{resourceName}/providers/Microsoft.Insights/diagnosticSettings/{name}?api-version=2021-05-01-preview
 ```
 
-You can also get list of _diagnostics setting category_ using REST API. See [documentation](https://docs.microsoft.com/en-us/rest/api/monitor/diagnosticsettingscategory/list)
+You can also get list of _diagnostics setting category_ using REST API. See [documentation](https://learn.microsoft.com/en-us/rest/api/monitor/diagnostic-settings-category/list)
 
 ## Troubleshooting
 
@@ -105,7 +104,7 @@ You also need to enable `"assignPermissions": "true"` in `parameter` section.
 Evaluation of DeployIfNotExists policy was unsuccessful. The policy assignment '/subscriptions/{subscription_id}/resourceGroups/test-rg/providers/Microsoft.Authorization/policyAssignments/1c21f96844444b0cb677bb53/' resource identity does not have the necessary permissions. Please see https://aka.ms/arm-policy-identity for usage details
 ```
 
-> https://docs.microsoft.com/en-us/azure/governance/policy/concepts/definition-structure#parameter-properties
+> https://learn.microsoft.com/en-us/azure/governance/policy/concepts/definition-structure-basics#parameter-properties
 
 3. Role definition
 

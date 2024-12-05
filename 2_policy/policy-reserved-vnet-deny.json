@@ -8,7 +8,7 @@
                 "description": "Address Prefix"
             },
             "defaultValue": [
-                "100.64.0.0/16"
+                "10.64.0.0/16"
             ]
         }
     },

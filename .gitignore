@@ -3,3 +3,6 @@
 terraform.*
 override.tf
 _*
+
+PS2RootCert.cer
+PSChildCert.pfx

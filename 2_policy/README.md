@@ -1,16 +1,20 @@
 ## Built-in Policy
 
-Examples of built-in policies.
+Examples of built-in policies/initiatives.
+
+- [Append a tag and its value to resources](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Tags/ApplyTag_Append.json)
 
 - [Allowed VM size SKU](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Compute/VMSkusAllowed_Deny.json)
 
-- [Enable Azure Security Center on your subscription](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Security%20Center/ASC_Register_To_Azure_Security_Center_Deploy.json)
+- [Configure Microsoft Defender CSPM to be enabled](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Security%20Center/ASC_Azure_Defender_CSPM_DINE.json)
 
-- [Deploy Log Analytics agent for Linux VMs](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Monitoring/LogAnalyticsExtension_Linux_VM_Deploy.json)
+- [Configure diagnostic settings for Blob Services to Log Analytics workspace](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Storage/BlobServicesLogsToWorkspace_DINE.json)
 
-For more built-in polices, see [https://docs.microsoft.com/en-us/azure/governance/policy/samples/built-in-policies](https://docs.microsoft.com/en-us/azure/governance/policy/samples/built-in-policies) for more information.
+- [Enable Azure Monitor for VMs with Azure Monitoring Agent(AMA)](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policySetDefinitions/Monitoring/AzureMonitor_VM_AMA_new.json)
 
-> To enable OS metrics in Log Analytics, see [documentation](https://docs.microsoft.com/en-us/azure/azure-monitor/learn/quick-collect-linux-computer)
+To enable OS metrics in Log Analytics, see [documentation](https://learn.microsoft.com/en-us/azure/azure-monitor/vm/monitor-virtual-machine)
+
+For more built-in polices, see [https://learn.microsoft.com/en-us/azure/governance/policy/samples/built-in-policies](https://learn.microsoft.com/en-us/azure/governance/policy/samples/built-in-policies) for more information.
 
 ## Sample Custom Policy
 
@@ -30,14 +34,31 @@ this policy _deploy-if-not-exist_ WAF log (`ApplicationGatewayAccessLog`, `Appli
 
 CLI to create policy definition
 
+Windows:
+
 ```powershell
-Get-Content .\policy-deploy-waf-log.json | ConvertFrom-Json | % { $_.parameters } | ConvertTo-Json -Depth 15 > _params.json
-Get-Content .\policy-deploy-waf-log.json | ConvertFrom-Json | % { $_.policyRule } | ConvertTo-Json -Depth 15 > _rules.json
+Get-Content .\policy-waf-log-dine.json | ConvertFrom-Json | % { $_.parameters } | ConvertTo-Json -Depth 15 > _params.json
+Get-Content .\policy-waf-log-dine.json | ConvertFrom-Json | % { $_.policyRule } | ConvertTo-Json -Depth 15 > _rules.json
 
 az policy definition create --name 'test-deploy-waf-log' `
     --mode all --rules _rules.json `
     --params _params.json `
     --metadata "category=test" `
+    --subscription $subscriptionid
+```
+
+Linux:
+
+> You may need to install `jq`.
+
+```bash
+cat policy-waf-log-dine.json | jq .parameters > _params.json
+cat policy-waf-log-dine.json | jq .policyRule > _rules.json
+
+az policy definition create --name 'test-deploy-waf-log' \
+    --mode all --rules _rules.json \
+    --params _params.json \
+    --metadata "category=test" \
     --subscription $subscriptionid
 ```
 
