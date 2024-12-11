@@ -2,7 +2,7 @@
     "assignableScopes": [
         "/subscriptions/{subscription_id}"
     ],
-    "roleName": "NetOps",
+    "name": "NetOps",
     "description": "Platform-wide global connectivity management: VNets, UDRs, NSGs, NVAs, VPN, ExpressRoute, and others.",
     "permissions": [
         {

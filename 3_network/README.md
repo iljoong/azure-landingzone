@@ -1,4 +1,6 @@
-## README
+# Network
+
+Hub-spoke network Architecture
 
 ![setup](./setup.png)
 

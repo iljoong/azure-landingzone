@@ -2,7 +2,7 @@
     "assignableScopes": [
         "/subscriptions/{subscription_id}"
     ],
-    "roleName": "SecOps",
+    "name": "SecOps",
     "description": "Security administrator role with a horizontal view across the entire Azure estate and the Azure Key Vault purge policy.",
     "permissions": [
         {

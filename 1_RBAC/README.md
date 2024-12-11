@@ -23,19 +23,21 @@ https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/enterprise
 
 Sample `AppOps` role grants contributor permission except, _creating Public IP and VNet_ and purging KV. 
 
+> replace `{subscription_id}` in json file to your subscription id or management id.
+
 ```
-az role definition create --role-definition role_appops.json
+az role definition create --role-definition @role_appops.json
 
 az role assignment create --assignee {object id of user or group} --role 'AppOps' --scope '/subscriptions/{subscription id}'
 ```
 
-https://docs.microsoft.com/en-us/cli/azure/role/definition?view=azure-cli-latest
+https://learn.microsoft.com/en-us/cli/azure/role/definition?view=azure-cli-latest
 
 > :warining: You cannot assign `CustomRole` in Blueprint.
 
 ## Reference
 
-https://docs.microsoft.com/en-us/azure/role-based-access-control/overview
-https://docs.microsoft.com/en-us/azure/role-based-access-control/rbac-and-directory-admin-roles
-https://docs.microsoft.com/en-us/azure/role-based-access-control/custom-roles
-https://docs.microsoft.com/en-us/azure/role-based-access-control/role-definitions
+https://learn.microsoft.com/en-us/azure/role-based-access-control/overview
+https://learn.microsoft.com/en-us/azure/role-based-access-control/rbac-and-directory-admin-roles
+https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles
+https://learn.microsoft.com/en-us/azure/role-based-access-control/role-definitions
