@@ -1,0 +1,34 @@
+{
+    "mode": "All",
+    "parameters": {
+    "tagName": {
+        "type": "String",
+        "metadata": {
+        "displayName": "Tag Name",
+        "description": "Name of the tag, such as 'environment'"
+        }
+    },
+    "tagValue": {
+        "type": "String",
+        "metadata": {
+        "displayName": "Tag Value",
+        "description": "Value of the tag, such as 'production'"
+        }
+    }
+    },
+    "policyRule": {
+    "if": {
+        "field": "[concat('tags[', parameters('tagName'), ']')]",
+        "exists": "false"
+    },
+    "then": {
+        "effect": "append",
+        "details": [
+        {
+            "field": "[concat('tags[', parameters('tagName'), ']')]",
+            "value": "[parameters('tagValue')]"
+        }
+        ]
+    }
+    }
+}

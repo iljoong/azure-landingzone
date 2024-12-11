@@ -2,11 +2,8 @@
     "assignableScopes": [
         "/subscriptions/{subscription_id}"
     ],
-    "roleName": "AppOps",
+    "name": "AppOps",
     "description": "Contributor role granted for application/operations team at resource group level.",
-    "Actions": [
-        "*"
-    ],
     "permissions": [
         {
             "actions": [
