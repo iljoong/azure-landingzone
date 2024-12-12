@@ -3,8 +3,10 @@
 Examples of built-in policies/initiatives.
 
 - [Append a tag and its value to resources](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Tags/ApplyTag_Append.json)
-
 - [Allowed VM size SKU](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Compute/VMSkusAllowed_Deny.json)
+
+- [Configure your Storage account public access to be disallowed](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Storage/StorageAccountDisablePublicBlobAccess_Modify.json)      
+    - Note: _Public access_ means __anonymous access__ and NOT __public internet access__. (This can be configured in Configuration setttings.)
 
 - [Configure Microsoft Defender CSPM to be enabled](https://github.com/Azure/azure-policy/blob/master/built-in-policies/policyDefinitions/Security%20Center/ASC_Azure_Defender_CSPM_DINE.json)
 
@@ -32,15 +34,15 @@ this policy _deploy-if-not-exist_ WAF log (`ApplicationGatewayAccessLog`, `Appli
 
 ## CLI
 
-CLI to create policy definition
+CLI to create policy definition for _custom public access policy_.
 
 Windows:
 
 ```powershell
-Get-Content .\policy-waf-log-dine.json | ConvertFrom-Json | % { $_.parameters } | ConvertTo-Json -Depth 15 > _params.json
-Get-Content .\policy-waf-log-dine.json | ConvertFrom-Json | % { $_.policyRule } | ConvertTo-Json -Depth 15 > _rules.json
+Get-Content .\policy-storage-public-access-audit.json | ConvertFrom-Json | % { $_.parameters } | ConvertTo-Json -Depth 15 > _params.json
+Get-Content .\policy-storage-public-access-audit.json | ConvertFrom-Json | % { $_.policyRule } | ConvertTo-Json -Depth 15 > _rules.json
 
-az policy definition create --name 'test-deploy-waf-log' `
+az policy definition create --name 'test-storage-public-access-audit' `
     --mode all --rules _rules.json `
     --params _params.json `
     --metadata "category=test" `
@@ -52,10 +54,10 @@ Linux:
 > You may need to install `jq`.
 
 ```bash
-cat policy-waf-log-dine.json | jq .parameters > _params.json
-cat policy-waf-log-dine.json | jq .policyRule > _rules.json
+cat policy-storage-public-access-audit.json | jq .parameters > _params.json
+cat policy-storage-public-access-audit.json | jq .policyRule > _rules.json
 
-az policy definition create --name 'test-deploy-waf-log' \
+az policy definition create --name 'test-storage-public-access-audit' \
     --mode all --rules _rules.json \
     --params _params.json \
     --metadata "category=test" \

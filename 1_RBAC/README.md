@@ -37,7 +37,7 @@ https://learn.microsoft.com/en-us/cli/azure/role/definition?view=azure-cli-lates
 
 ## Reference
 
-https://learn.microsoft.com/en-us/azure/role-based-access-control/overview
-https://learn.microsoft.com/en-us/azure/role-based-access-control/rbac-and-directory-admin-roles
-https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles
-https://learn.microsoft.com/en-us/azure/role-based-access-control/role-definitions
+- https://learn.microsoft.com/en-us/azure/role-based-access-control/overview
+- https://learn.microsoft.com/en-us/azure/role-based-access-control/rbac-and-directory-admin-roles
+- https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles
+- https://learn.microsoft.com/en-us/azure/role-based-access-control/role-definitions
